@@ -39,13 +39,8 @@ public class VideoController {
     }
 
     @PostMapping(path = "/video/upload")
-    public String uploadVideo(@RequestParam("file") MultipartFile file, String title) throws IOException {
-        if (!file.isEmpty()) {
-            videoService.saveVideo(file, title);
-            String fullPath = file.getOriginalFilename();
-            file.transferTo(new File(fullPath));
-        }
-
+    public String uploadVideo(@RequestParam("file") MultipartFile file,@RequestParam("title") String title) throws IOException {
+        videoService.saveVideo(file, title);
         return "redirect:/video";
     }
 
